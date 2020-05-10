@@ -10,7 +10,7 @@ node {
 	
    stage('Mvn Package'){
 	   // Build using maven
-	   sh "${mvn}/bin/mvn clean package deploy"
+	   sh "${mvn}/bin/mvn clean package"
    }
  
 }
