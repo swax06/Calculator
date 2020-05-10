@@ -23,20 +23,21 @@ node {
 		DevOps Team""", cc: '', from: '', replyTo: '', subject: " Success", to: '06swastik@gmail.com'
 
 	}
+	stage('Deploy Dev'){
+	   //sh 'mv target/myweb*.war target/myweb.war' 
+	   
+	       //sshagent(['tomcat-dev']) {
+		//		sh "${stopTomcat}"
+		//		sh "${copyWar}"
+		//		sh "${startTomcat}"
+		  // }
+	   }
 	
 	stage('Build Docker Image'){
-            sh 'docker build -t swax06/calculator:1.0 .'
+            //sh 'docker build -t swax06/calculator:1.0 .'
         }
 	stage('Upload Image to DockerHub'){
-	    sh 'docker push kammana/calculator:1.0'
+	    //sh 'docker push kammana/calculator:1.0'
 	 }
-	stage('Deploy Dev'){
-	   sh 'mv target/myweb*.war target/myweb.war' 
-	   
-	       sshagent(['tomcat-dev']) {
-				sh "${stopTomcat}"
-				sh "${copyWar}"
-				sh "${startTomcat}"
-		   }
-	   }
+	
 }
