@@ -35,5 +35,8 @@ node {
 	stage('Build Docker Image'){
             sh 'docker build -t swax06/calculator:1.0 .'
         }
+	stage('Upload Image to DockerHub'){
+	    sh 'docker push kammana/calculator:1.0'
+	 }
 
 }
