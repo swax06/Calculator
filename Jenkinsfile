@@ -19,7 +19,7 @@ node {
 
 	}
 	stage('Build Docker Image'){
-            sh 'docker build -t swax06/calculator:1.0-SNAPSHOT'
+            sh 'docker build -t swax06/calculator:1.0 .'
         }
 
 }
