@@ -1,6 +1,6 @@
 node {
 	def tomcatIp = '192.168.0.6'
-        def tomcatUser = 'swax'
+        def tomcatUser = 'admin'
         def stopTomcat = "ssh ${tomcatUser}@${tomcatIp} /opt/tomcat8/bin/shutdown.sh"
         def startTomcat = "ssh ${tomcatUser}@${tomcatIp} /opt/tomcat8/bin/startup.sh"
         def copyWar = "scp -o StrictHostKeyChecking=no target/myweb.war ${tomcatUser}@${tomcatIp}:/opt/tomcat8/webapps/"
