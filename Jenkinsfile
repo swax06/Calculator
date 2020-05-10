@@ -1,4 +1,9 @@
 node {
+	def tomcatIp = '192.168.0.6'
+        def tomcatUser = 'swax'
+        def stopTomcat = "ssh ${tomcatUser}@${tomcatIp} /opt/tomcat8/bin/shutdown.sh"
+        def startTomcat = "ssh ${tomcatUser}@${tomcatIp} /opt/tomcat8/bin/startup.sh"
+        def copyWar = "scp -o StrictHostKeyChecking=no target/myweb.war ${tomcatUser}@${tomcatIp}:/opt/tomcat8/webapps/"
 	def mvn = tool name: 'Maven_3.6.3', type: 'maven'
 	stage('SCM Checkout'){
 		// Clone repo
@@ -12,6 +17,15 @@ node {
 		// Build using maven
 		sh "${mvn}/bin/mvn clean package"
 	}
+	stage('Deploy Dev'){
+	   sh 'mv target/myweb*.war target/myweb.war' 
+	   
+	       sshagent(['tomcat-dev']) {
+				sh "${stopTomcat}"
+				sh "${copyWar}"
+				sh "${startTomcat}"
+		   }
+	   }
 	stage('Email Notification'){
 		mail bcc: '', body: """Hi Team, You build successfully deployed
 		Thanks,
