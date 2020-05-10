@@ -1,10 +1,4 @@
 node {
-    environment {
-        registry = "swax06/calculator"
-        registryCredential = 'dockerhub'
-        dockerImage = ''
-    }
-    agent any
 	def mvn = tool name: 'Maven_3.6.3', type: 'maven'
 	stage('SCM Checkout'){
 		// Clone repo
@@ -24,18 +18,8 @@ node {
 		DevOps Team""", cc: '', from: '', replyTo: '', subject: " Success", to: '06swastik@gmail.com'
 
 	}
-	stage('Archive'){
-            steps{
-                script {
-                    docker.withRegistry( '', registryCredential ) {
-                    dockerImage.push()
-                    }
-                }
-            }
+	stage('Build Docker Image'){
+            sh 'docker build -t swax06/calculator:1.0-SNAPSHOT'
         }
-        stage('Deploy') {
-            steps {
-                build 'calculator_new'
-            }
-        }
+
 }
