@@ -17,6 +17,19 @@ node {
 		// Build using maven
 		sh "${mvn}/bin/mvn clean package"
 	}
+	stage('Email Notification'){
+		mail bcc: '', body: """Hi Team, You build successfully deployed
+		Thanks,
+		DevOps Team""", cc: '', from: '', replyTo: '', subject: " Success", to: '06swastik@gmail.com'
+
+	}
+	
+	stage('Build Docker Image'){
+            sh 'docker build -t swax06/calculator:1.0 .'
+        }
+	stage('Upload Image to DockerHub'){
+	    sh 'docker push kammana/calculator:1.0'
+	 }
 	stage('Deploy Dev'){
 	   sh 'mv target/myweb*.war target/myweb.war' 
 	   
@@ -26,17 +39,4 @@ node {
 				sh "${startTomcat}"
 		   }
 	   }
-	stage('Email Notification'){
-		mail bcc: '', body: """Hi Team, You build successfully deployed
-		Thanks,
-		DevOps Team""", cc: '', from: '', replyTo: '', subject: " Success", to: '06swastik@gmail.com'
-
-	}
-	stage('Build Docker Image'){
-            sh 'docker build -t swax06/calculator:1.0 .'
-        }
-	stage('Upload Image to DockerHub'){
-	    sh 'docker push kammana/calculator:1.0'
-	 }
-
 }
