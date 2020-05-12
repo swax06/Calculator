@@ -6,7 +6,6 @@ pipeline {
 	}
 	agent any
 	
-	stages {
 		stage('SCM Checkout'){
 			git branch: 'master', 
 			credentialsId: 'github', 
@@ -40,5 +39,4 @@ pipeline {
 				build 'new_calculator'
 			}
 		}
-	}
 }
