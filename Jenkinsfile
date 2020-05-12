@@ -5,13 +5,7 @@ pipeline {
 		dockerImage = ''
 	}
 	agent any
-	
-		stage('SCM Checkout'){
-			git branch: 'master', 
-			credentialsId: 'github', 
-			url: 'https://github.com/swax06/Calculator'
-
-		}
+	stages{
 		stage('Build') {
 			steps{
 				script {
@@ -39,4 +33,5 @@ pipeline {
 				build 'new_calculator'
 			}
 		}
+	}
 }
