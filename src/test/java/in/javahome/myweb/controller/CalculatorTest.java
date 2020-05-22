@@ -1,4 +1,4 @@
-package in.javahome.myweb.controller;
+package in.javahome;
 
 
 import java.io.FileOutputStream;
@@ -12,42 +12,16 @@ import junit.framework.TestCase;
 public class CalculatorTest extends TestCase {
 	Calculator cal = new Calculator();
 
-	public void testAdd() {
-		Properties prop = new Properties();
-		
-		OutputStream output = null;
-
-		try
-		{
-
-			output = new FileOutputStream("../config.properties");
-
-			// set the properties value
-			prop.setProperty("database", "localhost");
-			prop.setProperty("dbuser", "hari");
-			prop.setProperty("dbpassword", "password");
-
-			// save properties to project root folder
-			prop.store(output, null);
-
-		}catch(
-		IOException io)
-		{
-			io.printStackTrace();
-		}finally
-		{
-			if (output != null) {
-				try {
-					output.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-
-		}
+	public void testAddition() {
+		Assert.assertEquals(cal.add(10, 20), 30);
 	}
-
-	public void testMultiply() {
-		Assert.assertEquals(cal.multiply(10, 20), 200);
+	public void testMultiplication() {
+		Assert.assertEquals(cal.multiply(10, 2), 20);
+	}
+	public void testSubtraction() {
+		Assert.assertEquals(cal.subtract(15, 20), -5);
+	}
+	public void testDivision() {
+		Assert.assertEquals(cal.divide(100, 20), 5);
 	}
 }

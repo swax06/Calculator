@@ -1,19 +1,15 @@
-package in.javahome.myweb.controller;
-/*
- * 
- */
+package in.javahome;
 public class Calculator {
-	/*
-	 * @param i
-	 * @param j
-	 * @return int
-	 */
 	public int add(int i, int j){
-		String s = null;
-		s.toString();
 		return i+j;
 	}
 	public int multiply(int i, int j){
 		return i*j;
+	}
+	public int subtract(int i, int j){
+		return i-j;
+	}
+	public int divide(int i, int j){
+		return i/j;
 	}
 }
