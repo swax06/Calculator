@@ -29,6 +29,7 @@ node {
 	}
 
 	stage('Deploy'){
+		//triggering Rundeck
 		steps{
 			script {
 				step([ $class: "RundeckNotifier",
