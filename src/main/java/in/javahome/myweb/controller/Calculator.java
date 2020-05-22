@@ -13,3 +13,4 @@ public class Calculator {
 		return i/j;
 	}
 }
+

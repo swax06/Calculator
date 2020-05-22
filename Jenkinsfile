@@ -1,6 +1,6 @@
 node {
 	def mvn = tool name: 'Maven_3.6.3', type: 'maven'
-	stage('SCM Checkout'){
+	stage('Git Checkout'){
 		// Clone repo
 		git branch: 'master', 
 		credentialsId: 'github', 
@@ -8,12 +8,12 @@ node {
 
 	}
 
-	stage('Mvn Package'){
+	stage('Building Package'){
 		// Build using maven
 		sh "${mvn}/bin/mvn clean package"
 	}
 
-	stage('Mvn Package'){
+	stage('Junit Testing'){
 		// testing using Junit
 		sh "${mvn}/bin/mvn test"
 	}
@@ -26,7 +26,7 @@ node {
 	}
 	
 	stage('Build Docker Image'){
-		sh 'cp target/*SNAPSHOT.jar myApp.jar'
+		sh 'cp target/*SNAPSHOT.jar calculator.jar'
     }
 	stage('Upload Image to DockerHub'){
 	    script{
