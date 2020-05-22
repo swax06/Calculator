@@ -24,7 +24,8 @@ public class myMain {
 			  return;
 		}
 		System.out.print("\nThe result is given as follows:\n");
-		System.out.printf(num1 + " " + op + " " + num2 + " = " + ans);
+		System.out.print(num1 + " " + op + " " + num2 + " = " + ans);
+		System.out.print("\n\n");
 	 }
 }
 
