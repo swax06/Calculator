@@ -28,15 +28,27 @@ node {
 	    sh 'docker push swax06/calculator:1.0-SNAPSHOT'
 	}
 
+	stage('Deploy'){
+		steps{
+			script {
+				step([ $class: "RundeckNotifier",
+				includeRundeckLogs: true,
+				jobId: "deb9a3fa-f87a-4028-af5c-c48cd729a129",
+				rundeckInstance: "Rundeck_inst_1",
+				shouldFailTheBuild: true,shouldWaitForRundeckJob: false,
+				tailLog: true])
+			}
+		}
+	}
+
+
 	stage('Email Notification'){
 		mail bcc: '', body: """Hi Team, You build successfully deployed
 		Thanks,
 		DevOps Team""", cc: '', from: '', replyTo: '', subject: "New Build Success", 
 		to: 'swastik.shrivastava@iiitb.org'
 	}
-	stage('Deploy') {
-		sh 'sleep 22'
-	}
+	
 
 }
 
