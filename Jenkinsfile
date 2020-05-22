@@ -12,32 +12,30 @@ node {
 		// Build using maven
 		sh "${mvn}/bin/mvn clean package"
 	}
+
 	stage('Mvn Package'){
-		// Build using maven
+		// testing using Junit
 		sh "${mvn}/bin/mvn test"
 	}
+
 	stage('Email Notification'){
 		mail bcc: '', body: """Hi Team, You build successfully deployed
 		Thanks,
 		DevOps Team""", cc: '', from: '', replyTo: '', subject: " Success", 
 		to: '06swastik@gmail.com'
 	}
-	stage('Deploy Dev'){
-	   sh 'mv target/myweb*.war target/myweb.war' 
-	   
-	       sshagent(['tomcat-dev']) {
-				sh "${stopTomcat}"
-				sh "${copyWar}"
-				sh "${startTomcat}"
-		 }
-	   }
 	
 	stage('Build Docker Image'){
-            sh 'docker build -t swax06/calculator:1.0 .'
-        }
+		sh 'cp target/*SNAPSHOT.jar myApp.jar'
+    }
 	stage('Upload Image to DockerHub'){
-	    sh 'docker push kammana/calculator:1.0'
-	 }
+	    script{
+			def dockerImage=docker.build("swax06/Calculator")
+			docker.withRegistry( '', 'docker-hub-creds') {
+				dockerImage.push()
+			}
+		}
+	}
 	
 }
 
