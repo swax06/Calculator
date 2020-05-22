@@ -1,3 +1,3 @@
 FROM openjdk:15-alpine
-ADD calculator.jar /calculator_build.jar
-ENTRYPOINT ["java", "-jar", "/calculator.jar"]
+COPY target/*SNAPSHOT.jar /calculator_build.jar
+ENTRYPOINT ["java", "-jar", "/calculator_build.jar"]

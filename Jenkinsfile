@@ -26,15 +26,13 @@ node {
 	}
 	
 	stage('Build Docker Image'){
-		sh 'cp target/*SNAPSHOT.jar calculator.jar'
+		sh 'docker build -t swax06/calculator:1.0-SNAPSHOT .'
     }
 	stage('Upload Image to DockerHub'){
-	    script{
-			def dockerImage=docker.build("swax06/Calculator")
-			docker.withRegistry( '', 'docker-hub-creds') {
-				dockerImage.push()
-			}
+		withCredentials([string(credentialsId: 'docker-pwd', variable: 'docker_pass')]) {
+			sh 'docker login -u swax06 -p ${docker_pass}'
 		}
+	    sh 'docker push swax06/calculator:1.0-SNAPSHOT .'
 	}
 	
 }
