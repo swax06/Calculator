@@ -29,16 +29,17 @@ node {
 	}
 
 	stage('Deploy'){
-		steps{
-			script {
-				step([ $class: "RundeckNotifier",
-				includeRundeckLogs: true,
-				jobId: "deb9a3fa-f87a-4028-af5c-c48cd729a129",
-				rundeckInstance: "Rundeck_inst_1",
-				shouldFailTheBuild: true,shouldWaitForRundeckJob: false,
-				tailLog: true])
-			}
-		}
+		sh 'sleep 24'
+		// steps{
+		// 	script {
+		// 		step([ $class: "RundeckNotifier",
+		// 		includeRundeckLogs: true,
+		// 		jobId: "deb9a3fa-f87a-4028-af5c-c48cd729a129",
+		// 		rundeckInstance: "Rundeck_inst_1",
+		// 		shouldFailTheBuild: true,shouldWaitForRundeckJob: false,
+		// 		tailLog: true])
+		// 	}
+		// }
 	}
 
 
