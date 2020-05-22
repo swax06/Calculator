@@ -34,6 +34,9 @@ node {
 		DevOps Team""", cc: '', from: '', replyTo: '', subject: "New Build Success", 
 		to: 'swastik.shrivastava@iiitb.org'
 	}
+	stage('Deploy') {
+		sh 'sleep 22'
+	}
 
 }
 
